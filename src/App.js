@@ -1,24 +1,26 @@
-import logo from './logo.svg';
-import './App.scss';
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import ErrorBoundary from "./utils/ErrorBoundary.js";
+import { ROUTES } from "./utils/routes.js";
+import "./App.scss";
+import Home from "./containers/Home.js";
+import Search from "./containers/Search.js";
+import NotFound from "./containers/NotFound.js";
+import NavBar from "./components/Navbar/index.js";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ErrorBoundary>
+              <NavBar/>
+
+      <Router>
+        <Switch>
+
+          <Route component={Home} exact path={ROUTES.index} />
+          <Route component={Search} exact path={ROUTES.search} />
+          <Route component={NotFound} />
+        </Switch>
+      </Router>
+    </ErrorBoundary>
   );
 }
 
